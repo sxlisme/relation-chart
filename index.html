@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>关系demo</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.12.0/index.js"></script>
+    <link href="https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css" rel="stylesheet">
+    <!-- <script src="./js/dist.js"></script> -->
+    <script src="./js/11.js"></script>
+    <style>
+    #chart {
+        width: 1200px;
+        height: 1000px;
+        display: inline-block;
+
+    }
+
+    div#right {
+        float: right;
+        width: 100px;
+        display: inline-block;
+    }
+    </style>
+</head>
+
+<body>
+    <div id='app'>
+        <div id='chart'></div>
+        <div id='right'>
+            <el-checkbox-group v-model="checkList">
+                <template v-for='(item,i) in checkLists'>
+                    <el-checkbox :label="item" :key='i'></el-checkbox>
+                </template>
+            </el-checkbox-group>
+        </div>
+    </div>
+    <script>
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                checkLists: ['从属', '管理', '服务'],
+                checkList: ['从属'],
+                data: {
+                    "nodes": [{
+                            "source": 0,
+                            "name": "五强溪厂",
+                            "role_id": 41,
+                            "group": 0,
+                            "avatar": "./img/factory.png",
+                            "bg": "#025",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 1,
+                            "name": "发电机",
+                            "role_id": 42,
+                            "group": 0,
+                            "avatar": "./img/ava.png",
+                            "bg": "#0ff",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 2,
+                            "name": "变压器",
+                            "role_id": 44,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#0f0",
+                            "r": 40, //半径大小
+
+                        },
+                        {
+                            "source": 3,
+                            "name": "湖南电网",
+                            "role_id": 45,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 4,
+                            "name": "服务",
+                            "role_id": 47,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        },
+                        {
+                            "source": 5,
+                            "name": "#1号机",
+                            "role_id": 48,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 6,
+                            "name": "#2号机",
+                            "role_id": 49,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 7,
+                            "name": "显示器",
+                            "role_id": 50,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 8,
+                            "name": "cpu",
+                            "role_id": 51,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        }
+                    ],
+                    "links": [{
+                            "source": 1, // 起始节点在 nodes[] 中的索引
+                            "target": 0, // 目标节点在 nodes[] 中的索引
+                            "relation": "从属", // 关系名称
+                            "color": "abaadd" // 自定义细条颜色,#734646
+                        },
+                        {
+                            "source": 2,
+                            "target": 0,
+                            "relation": "从属",
+                            "color": "abaadd"
+                        },
+                        {
+                            "source": 3,
+                            "target": 0,
+                            "relation": "管理",
+                            "color": "0f0"
+                        },
+                        {
+                            "source": 4,
+                            "target": 0,
+                            "relation": "服务",
+                            "color": "000000"
+                        },
+                        {
+                            "source": 5,
+                            "target": 2,
+                            "relation": "从属",
+                            "color": "abaadd"
+                        },
+                        {
+                            "source": 6,
+                            "target": 2,
+                            "relation": "从属",
+                            "color": "abaadd"
+                        },
+                        {
+                            "source": 7,
+                            "target": 6,
+                            "relation": "从属",
+                            "color": "abaadd"
+                        },
+                        {
+                            "source": 8,
+                            "target": 6,
+                            "relation": "从属",
+                            "color": "abaadd"
+                        }
+                    ]
+                },
+                constData:{
+                    "nodes": [{
+                            "source": 0,
+                            "name": "五强溪厂",
+                            "role_id": 41,
+                            "group": 0,
+                            "avatar": "./img/factory.png",
+                            "bg": "#025",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 1,
+                            "name": "发电机",
+                            "role_id": 42,
+                            "group": 0,
+                            "avatar": "./img/ava.png",
+                            "bg": "#0ff",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 2,
+                            "name": "变压器",
+                            "role_id": 44,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#0f0",
+                            "r": 40, //半径大小
+
+                        },
+                        {
+                            "source": 3,
+                            "name": "湖南电网",
+                            "role_id": 45,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 4,
+                            "name": "服务",
+                            "role_id": 47,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        },
+                        {
+                            "source": 5,
+                            "name": "#1号机",
+                            "role_id": 48,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 6,
+                            "name": "#2号机",
+                            "role_id": 49,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 7,
+                            "name": "显示器",
+                            "role_id": 50,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        }, {
+                            "source": 8,
+                            "name": "cpu",
+                            "role_id": 51,
+                            "group": 1,
+                            "avatar": "./img/ava.png",
+                            "bg": "#eee",
+                            "r": 40, //半径大小
+
+
+                        }
+                    ],
+                    "links": [{
+                            "source": 1, // 起始节点在 nodes[] 中的索引
+                            "target": 0, // 目标节点在 nodes[] 中的索引
+                            "relation": "从属", // 关系名称
+                            "color": "abaadd" // 自定义细条颜色,#734646
+                        },
+                        {
+                            "source": 2,
+                            "target": 0,
+                            "relation": "从属",
+                            "color": "abaadd"
+                        },
+                        {
+                            "source": 3,
+                            "target": 0,
+                            "relation": "管理",
+                            "color": "0f0"
+                        },
+                        {
+                            "source": 4,
+                            "target": 0,
+                            "relation": "服务",
+                            "color": "000000"
+                        },
+                        {
+                            "source": 5,
+                            "target": 2,
+                            "relation": "从属",
+                            "color": "abaadd"
+                        },
+                        {
+                            "source": 6,
+                            "target": 2,
+                            "relation": "从属",
+                            "color": "abaadd"
+                        },
+                        {
+                            "source": 7,
+                            "target": 6,
+                            "relation": "从属",
+                            "color": "abaadd"
+                        },
+                        {
+                            "source": 8,
+                            "target": 6,
+                            "relation": "从属",
+                            "color": "abaadd"
+                        }
+                    ]
+                },
+                defaultConfig: {
+                    width: 1000, // 总画布svg的宽,单位为px,默认为容器的宽
+                    height: 800, // 高，默认为容器的高
+                    isHighLight: true, // 是否启动 鼠标 hover 到节点上高亮与节点有关的节点，其他无关节点透明的功能
+                    isScale: true, // 是否启用缩放平移zoom功能
+                    scaleExtent: [0.5, 1.5], // 缩放的比例尺
+                    chargeStrength: -300, // 万有引力
+                    collide: 100, // 碰撞力的大小 （节点之间的间距）
+                    nodeWidth: 260, // 每个node节点所占的宽度，正方形
+                    margin: 20, // node节点距离父亲div的margin
+                    alphaDecay: 0.0228, // 控制力学模拟衰减率
+                    r: 35, // 头像的半径 [30 - 45]
+                    relFontSize: 12, // 关系文字字体大小
+                    linkSrc: 30, // 划线时候的弧度
+                    linkColor: '#bad4ed', // 链接线默认的颜色
+                    strokeColor: '#7ecef4', // 头像外围包裹的颜色
+                    strokeWidth: 5, // 头像外围包裹的宽度
+                }
+            }
+        },
+        watch:{
+            checkList:function(){
+                var newData ={}    
+                var links = [];
+                var nodes=[];
+                var delSource=[];
+                this.constData.links.map((item)=>{
+                        if(this.checkList.indexOf(item.relation)>-1 ){                            
+                            links.push(item);
+                        }else{
+                            delSource.push(item.source);
+                        }
+                });
+                this.constData.nodes.map((item)=>{
+                    if(delSource.indexOf(item.source)===-1){
+                         nodes.push(item);
+                    }else{
+                       
+                    }
+                })
+                var newData ={}
+                newData.nodes=nodes;
+                newData.links = links;
+                console.log(newData);
+                this.element.innerHTML = ''; //清空
+                new RelationChart(this.element, newData, this.defaultConfig);
+            }
+        },
+        methods: {
+            draw() {
+                this.element.innerHTML = ''; //清空
+                new RelationChart(this.element, this.data, this.defaultConfig);
+            }
+        },
+        computed: {
+            element: function() {
+                return document.getElementById('chart');
+            }
+        },
+
+        mounted() {
+            this.draw(); //画图
+
+        }
+    })
+    </script>
+</body>
+
+</html>
